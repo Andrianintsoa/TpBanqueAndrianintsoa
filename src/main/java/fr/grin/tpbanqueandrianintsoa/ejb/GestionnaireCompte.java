@@ -4,8 +4,13 @@
  */
 package fr.grin.tpbanqueandrianintsoa.ejb;
 
+import fr.grin.tpbanqueandrianintsoa.entities.CompteBancaire;
 import jakarta.annotation.sql.DataSourceDefinition;
 import jakarta.ejb.Stateless;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.Query;
+import java.util.List;
 
 /**
  *
@@ -26,5 +31,23 @@ import jakarta.ejb.Stateless;
 )
 @Stateless
 public class GestionnaireCompte {
+        @PersistenceContext(unitName = "banquePU")
+    private EntityManager em;
+
+    public void creerCompte(CompteBancaire c){
+        em.persist(c);
+    }    
     
+    public List<CompteBancaire> getAllComptes() {
+       Query query = em.createNamedQuery("Banque.findAll");
+       return query.getResultList();
+    }
+
+    public CompteBancaire update(CompteBancaire comptebancaire) {
+       return em.merge(comptebancaire);
+    }
+
+    public void persist(CompteBancaire comptebancaire) {
+       em.persist(comptebancaire);
+    }
 }
