@@ -5,6 +5,7 @@
 package fr.grin.tpbanqueandrianintsoa.ejb;
 
 import fr.grin.tpbanqueandrianintsoa.entities.CompteBancaire;
+import jakarta.annotation.PostConstruct;
 import jakarta.annotation.sql.DataSourceDefinition;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
@@ -49,5 +50,9 @@ public class GestionnaireCompte {
 
     public void persist(CompteBancaire comptebancaire) {
        em.persist(comptebancaire);
+    }
+    @PostConstruct
+    public void nbComptes(){
+        count(c)
     }
 }
