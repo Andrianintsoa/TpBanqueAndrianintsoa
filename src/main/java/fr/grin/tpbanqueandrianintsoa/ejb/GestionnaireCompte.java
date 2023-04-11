@@ -53,6 +53,6 @@ public class GestionnaireCompte {
     }
     @PostConstruct
     public void nbComptes(){
-        count(c)
+        /*count(c)*/
     }
 }
