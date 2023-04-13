@@ -59,7 +59,7 @@ public class GestionnaireCompte {
         return query.getSingleResult();
     }
     
-    public CompteBancaire findById(int id) {  
+    public CompteBancaire findById(long id) {  
         return em.find(CompteBancaire.class, id);  
     } 
     
