@@ -52,10 +52,24 @@ public class GestionnaireCompte {
     public void persist(CompteBancaire comptebancaire) {
        em.persist(comptebancaire);
     }
-    @PostConstruct
+    
     public Long nbComptes(){
         String req = "select count(c) from CompteBancaire c";
         TypedQuery<Long> query = em.createQuery(req , Long.class);
         return query.getSingleResult();
     }
+    
+    public CompteBancaire findById(int id) {  
+        return em.find(CompteBancaire.class, id);  
+    } 
+    
+    public void transferer(CompteBancaire source, CompteBancaire destination,
+            int montant) {
+        source.retirer(montant);
+        destination.deposer(montant);
+        update(source);
+        update(destination);
+    }
+  
+    
 }
