@@ -22,22 +22,27 @@
                                      required="true"
                                      converterMessage="L'id est un nombre entier"/>
                         <h:message for="source"/>
+                        <h:message for="source" errorStyle="color:darkred"/>
                         
                         Id compte Destination : 
                         <h:inputText id="destination" size="3" value="#{transfert.idDestination}"
                                      required="true"
                                      converterMessage="L'id est un nombre entier"/>
                         <h:message for="destination"/>
-                        
+                        <h:message for="destination" errorStyle="color:darkred"/>
+                                                
                         Montant : 
                         <h:inputText id="montant" size="3" value="#{transfert.montant}"
                                      required="true"
                                      converterMessage="Le montant est un nombre positif"/>
                         <h:message for="montant"/>
+                        <h:message for="montant" errorStyle="color:darkred"/>
                         
                         <h:commandButton id="submit" value="Valider" action="#{transfert.submitTransfert}"/>
                         
                     </h:panelGrid>
+                    <h:messages globalOnly="true" errorStyle="display: red;"/>
+                    
                 </h:form>
                 <h:messages infoStyle="color:darkgreen" errorStyle="color:darkred"/>
             </ui:define>
