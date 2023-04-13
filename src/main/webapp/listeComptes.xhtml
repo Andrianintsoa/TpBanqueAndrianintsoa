@@ -15,25 +15,29 @@
             </ui:define>
 
             <ui:define name="content">
-                <p:dataTable value="#{GestionnaireCompte.banque}"
-               var="item"  >
-                    <p:column>
-                       <f:facet name="header">
-                           <h:outputText value="Id"/>
-                       </f:facet>
-                       <h:outputText value="#{item.banqueId}"/>
+                <p:dataTable value="#{gestionComptes.allComptes}" var="item"
+                             tableStyle="width:auto" 
+                             paginator="true"
+                             tableStyle="width:auto">
+                    <p:column width="40">
+                        <f:facet name="header">
+                            <h:outputText value="Id"/>
+                        </f:facet>
+                        <h:outputText value="#{item.id}"/>
                     </p:column>
-                    <p:column>
-                       <f:facet name="header">
-                           <h:outputText value="Nom"/>
-                       </f:facet>
-                       <h:outputText value="#{item.name}"/>
+                    <p:column width="200">
+                        <f:facet name="header">
+                            <h:outputText value="Nom"/>
+                        </f:facet>
+                        <h:outputText value="#{item.nom}"/>
                     </p:column>
-                    <p:column>
-                       <f:facet name="header">
-                           <h:outputText value="Solde"/>
-                       </f:facet>
-                       <h:outputText value="#{item.sold}"/>
+                    <p:column style="text-align:right;" width="60">
+                        <f:facet name="header">
+                            <h:outputText value="Solde"/>
+                        </f:facet>
+                        <h:outputText value="#{item.solde}">
+                            <f:convertNumber pattern="###,###,##0"/>
+                        </h:outputText>
                     </p:column>
                 </p:dataTable>
             </ui:define>
