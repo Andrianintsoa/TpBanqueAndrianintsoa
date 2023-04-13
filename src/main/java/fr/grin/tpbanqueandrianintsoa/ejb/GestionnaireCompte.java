@@ -11,6 +11,7 @@ import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
+import jakarta.persistence.TypedQuery;
 import java.util.List;
 
 /**
@@ -40,7 +41,7 @@ public class GestionnaireCompte {
     }    
     
     public List<CompteBancaire> getAllComptes() {
-       Query query = em.createNamedQuery("Banque.findAll");
+       TypedQuery query = em.createNamedQuery("CompteBancaire.findAll", CompteBancaire.class);
        return query.getResultList();
     }
 
@@ -52,7 +53,9 @@ public class GestionnaireCompte {
        em.persist(comptebancaire);
     }
     @PostConstruct
-    public void nbComptes(){
-        /*count(c)*/
+    public Long nbComptes(){
+        String req = "select count(c) from CompteBancaire c";
+        TypedQuery<Long> query = em.createQuery(req , Long.class);
+        return query.getSingleResult();
     }
 }
