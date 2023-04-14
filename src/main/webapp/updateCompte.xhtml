@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <body>
+
+        <ui:composition template="./WEB-INF/templates/template_default.xhtml">
+
+            <ui:define name="metadata">
+                <f:metadata> 
+                    <f:viewParam name="id" value="#{updateCompte.id}"  
+                                 required="true"/>  
+                    <f:viewAction action="#{updateCompte.loadCompte}"/>  
+                </f:metadata>
+            </ui:define>
+
+            <ui:define name="title">
+                Modification compte
+            </ui:define>
+
+            <ui:define name="top">
+                Modification compte
+            </ui:define>
+
+            <ui:define name="content">
+                <h:form id="form">
+                    <h:panelGrid columns="3">
+
+                        Nom : 
+                        <h:inputText id="nom" size="3" value="#{updateCompte.compte.nom}"
+                                     required="true"
+                                     converterMessage="Le nom est obligatoire"/>
+                        <h:message for="nom" errorStyle="color:darkred"/>
+
+                        Solde : 
+                        <h:inputText id="solde" size="3" value="#{updateCompte.compte.solde}"
+                                     required="true" validator="#{updateCompte.validateSolde}" />
+                        <h:message for="solde" errorStyle="color:darkred"/>
+
+                        <h:commandButton value="Enregistrer" action="#{updateCompte.submitAction()}"/>
+
+                    </h:panelGrid>
+                    <h:messages globalOnly="true" errorStyle="display: red;"/>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
