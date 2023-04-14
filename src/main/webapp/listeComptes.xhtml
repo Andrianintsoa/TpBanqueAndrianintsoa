@@ -9,7 +9,7 @@
     <body>
 
         <ui:composition template="./WEB-INF/templates/template_default.xhtml">
-            
+
             <ui:param name="title" value="Liste des comptes"/>
             <ui:define name="top">
                 Liste des comptes
@@ -18,28 +18,54 @@
             <ui:define name="content">
                 <p:dataTable value="#{gestionComptes.allComptes}" var="item"
                              tableStyle="width:auto" 
+                             var="item"
                              paginator="true"
-                             tableStyle="width:auto">
-                    <p:column width="40">
+                             rows="10" 
+                             emptyMessage="Aucun compte avec ce critère"
+                             widgetVar="compteTable"
+                             rowsPerPageTemplate="2,4,8,10"
+                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown">
+
+                    <f:facet name="header">
+                        <p:outputPanel>
+                            <h:outputText value="Recherche dans tous les champs de recherche"/>
+                            <p:inputText id="globalFilter" onkeyup="PF('compteTable').filter()" style="width:150px"/>
+                        </p:outputPanel>
+                    </f:facet>
+
+                    <p:column>
                         <f:facet name="header">
                             <h:outputText value="Id"/>
                         </f:facet>
-                        <h:outputText value="#{item.id}"/>
+                        <h:link outcome="mouvement?id=#{item.id}" value="#{item.id}"/>
                     </p:column>
-                    <p:column width="200">
+
+                    <p:column sortBy="#{item.nom}" filterBy="#{item.nom}">
                         <f:facet name="header">
                             <h:outputText value="Nom"/>
                         </f:facet>
                         <h:outputText value="#{item.nom}"/>
                     </p:column>
-                    <p:column style="text-align:right;" width="60">
+
+                    <p:column sortBy="#{item.solde}" filterBy="#{item.solde}">
                         <f:facet name="header">
                             <h:outputText value="Solde"/>
                         </f:facet>
-                        <h:outputText value="#{item.solde}">
+                        <h:outputText value="#{item.sold}">
                             <f:convertNumber pattern="###,###,##0"/>
                         </h:outputText>
                     </p:column>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Action"/>
+                        </f:facet>
+                        <h:commandLink action="#{listCompteBean.supprimerCompte(item)}"
+                                       title="Supprimer le compte de #{item.nom}" >
+                            <h:graphicImage name="images/del.png"/>
+                        </h:commandLink>
+                    </p:column>
+
                 </p:dataTable>
             </ui:define>
         </ui:composition>

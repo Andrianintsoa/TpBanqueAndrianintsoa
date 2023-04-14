@@ -6,6 +6,7 @@ package fr.grin.tpbanqueandrianintsoa.jsf;
 
 import fr.grin.tpbanqueandrianintsoa.ejb.GestionnaireCompte;
 import fr.grin.tpbanqueandrianintsoa.entities.CompteBancaire;
+import fr.grin.tpbanqueandrianintsoa.jsf.util.Util;
 import jakarta.ejb.EJB;
 import jakarta.inject.Named;
 import jakarta.faces.view.ViewScoped;
@@ -27,10 +28,15 @@ public class ListeComptes implements Serializable {
      */
     public ListeComptes() {
     }
-    public List<CompteBancaire> getCustomers() {
+    public List<CompteBancaire> getAllComptes() {
     if (BanqueList == null) {
       BanqueList = gestionnaireCompte.getAllComptes();
     }
     return BanqueList;
   }  
+    public String supprimerCompte(CompteBancaire compteBancaire) {
+        gestionnaireCompte.supprimerCompte(compteBancaire);
+        Util.addFlashInfoMessage("Compte de " + compteBancaire.getNom() + " supprimé");
+        return "listeComptes?faces-redirect=true";
+    }
 }

@@ -92,4 +92,8 @@ public class GestionnaireCompte {
         update(compteBancaire);
     }
     
+    public void supprimerCompte(CompteBancaire compte) {
+        em.remove(em.merge(compte));
+    }
+    
 }
